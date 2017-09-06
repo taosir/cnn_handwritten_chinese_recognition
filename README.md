@@ -5,14 +5,17 @@
 一、数据集
 
   目前国内有很多优秀的中文手写识别数据集。例如：北京邮电大学模式识别实验室发布的数据(HCL2000)，它是目前最大的脱机手写汉字库，共有1,000个人书写，除了汉字样本库外，还有一个对应的书写者信息库，记录了书写者的年龄、职业、文化程度等信息，用于研究相关影响因素。目前此数据库免费向研究者公开。本文使用的是中科院自动研究所的分享的中文手写数据集CASIA-HWDB(下载地址http://www.nlpr.ia.ac.cn/databases/handwriting/Home.html )，由187个人通过Wacom笔在线输入的手写汉字。
+二、CNN结构：
 
-二、加载模型
+  ![ABC](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize_arch.png) 
+
+三、加载模型
 
   我训练模型迭代了12,000次之后，将训练参数保存在checkpoint文件夹中，不过因为单个文件大小的限制，训练好的模型文件从百度云上下载：
   链接: https://pan.baidu.com/s/1c1YT9tA 密码: j3gx;
   下载之后直接覆盖checkpoint文件夹。
 
-三、环境
+四、环境
 
   python 3.6.1;
 
@@ -26,7 +29,7 @@
 
   numpy 1.13.1;
 
-四、运行
+五、运行
 
   1、克隆项目，然后按照环境要求安装好相应的库(使用pip安装)；
 
