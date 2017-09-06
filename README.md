@@ -1,8 +1,8 @@
 # cnn_handwritten_chinese_recognition
-使用python+flask搭建的一个网站，然后从网页的写字板上获取鼠标手写的汉字经过转码后传回后台，并经过图片裁剪处理之后传入CNN手写中文识别的模型中进行识别，最后通过PIL将识别结果生成图片，最后异步回传给web端进行识别结果展示。中文总共50,000多汉字，常用的有3,755个。这里主要对常见的3755个汉字进行识别。<br>
+使用`python+flask`搭建的一个网站，然后从网页的写字板上获取鼠标手写的汉字经过转码后传回后台，并经过图片裁剪处理之后传入`CNN`手写中文识别的模型中进行识别，最后通过`PIL`将识别结果生成图片，最后异步回传给web端进行识别结果展示。中文总共`50,000`多汉字，常用的有`3,755`个。这里主要对常见的`3755`个汉字进行识别。<br>
 ![demogif](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize.gif) <br>
 ## 一、数据集<br>
-目前国内有很多优秀的中文手写识别数据集。例如：北京邮电大学模式识别实验室发布的数据(HCL2000)，它是目前最大的脱机手写汉字库，共有1,000个人书写，除了汉字样本库外，还有一个对应的书写者信息库，记录了书写者的年龄、职业、文化程度等信息，用于研究相关影响因素。目前此数据库免费向研究者公开。本文使用的是中科院自动研究所的分享的中文手写数据集CASIA-HWDB(下载地址http://www.nlpr.ia.ac.cn/databases/handwriting/Home.html )，由187个人通过Wacom笔在线输入的手写汉字。<br>
+目前国内有很多优秀的中文手写识别数据集。例如：北京邮电大学模式识别实验室发布的数据`(HCL2000)`，它是目前最大的脱机手写汉字库，共有`1,000`个人书写，除了汉字样本库外，还有一个对应的书写者信息库，记录了书写者的年龄、职业、文化程度等信息，用于研究相关影响因素。目前此数据库免费向研究者公开。本文使用的是中科院自动研究所的分享的中文手写数据集`CASIA-HWDB`(下载地址http://www.nlpr.ia.ac.cn/databases/handwriting/Home.html )，由187个人通过`Wacom`笔在线输入的手写汉字。<br>
 ## 二、CNN结构：<br>
 用`tensorflow`库来实现【三个卷积层+三个池化层+两个全连接层】的卷积神经网络，结构如下图所示：<br>
 ![cnn_model_arch](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize_arch.png) 
