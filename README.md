@@ -15,7 +15,7 @@
 三、环境
 
   python 3.6.1;
-  flask 0.12.2;
+  flask 0.12.2;
   tensorflow 1.3.0;
   pillow 4.2.1;
   pickleshare 0.7.4;
