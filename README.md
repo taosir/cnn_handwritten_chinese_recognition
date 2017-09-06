@@ -1,6 +1,6 @@
 # cnn_handwritten_chinese_recognition
-  使用python+flask搭建的一个网站，然后从网页的写字板上获取鼠标手写的汉字经过转码后传回后台，并经过图片裁剪处理之后传入CNN手写中文识别的模型中进行识别，最后通过PIL将识别结果生成图片，最后异步回传给web端进行识别结果展示。
-  中文总共50,000多汉字，常用的有3,755个。这里主要对常见的3755个汉字进行识别。
+   使用python+flask搭建的一个网站，然后从网页的写字板上获取鼠标手写的汉字经过转码后传回后台，并经过图片裁剪处理之后传入CNN手写中文识别的模型中进行识别，最后通过PIL将识别结果生成图片，最后异步回传给web端进行识别结果展示。
+   中文总共50,000多汉字，常用的有3,755个。这里主要对常见的3755个汉字进行识别。
   ![demogif](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize.gif) 
 
 一、数据集
