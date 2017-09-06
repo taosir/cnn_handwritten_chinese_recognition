@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>手写汉字识别(taosir)</title>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/drawingboard.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script src="{{url_for('static', filename='js/three.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/jquery-1.11.2.min.js')}}"></script>
+
+		<script src="{{url_for('static',filename='js/drawingboard/utils.js')}}"></script>
+		<script src="{{url_for('static',filename='js/drawingboard/board.js')}}"></script>
+		<script src="{{url_for('static',filename='js/drawingboard/controls/control.js')}}"></script>
+		<script src="{{url_for('static',filename='js/drawingboard/controls/drawingmode.js')}}"></script>
+		<script src="{{url_for('static',filename='js/drawingboard/controls/navigation.js')}}"></script>
+
+	</head>
+	<body>
+
+		<div id="canvasContainer">
+			<div id="drawingInterface">
+				<div class="instructions">手写汉字识别</div>
+				<div class="board" id="custom-board"></div>
+				<div class="drawingOutput">
+					<div class="row">
+						<div class="info">原始图：</div>
+						<div class="tinyBoard">
+							<canvas id="tiny" height="64" width="64"></canvas>
+						</div>
+					</div>
+					<div class="row">
+						<div class="info cell">识别结果1：<div id="pred1_accuracy"></div></div>
+						<div id="ans1" class="ans cell"><img id="pred1_result" src=""/></div>
+						<div class="info cell">识别结果2：<div id="pred2_accuracy"></div></div>
+						<div id="ans2" class="ans cell"><img id="pred2_result" src=""/></div>
+						<div class="info cell">识别结果3：<div id="pred3_accuracy"></div></div>
+						<div id="ans3" class="ans cell"><img id="pred3_result" src=""/></div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">Copyright &copy; <a href="http://www.taosir.top/" target="_blank">TAOSIR</a> 2017.</div>
+		</div>
+
+		<script type="text/javascript" color="252,255,0" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+		<script>
+			var goodStart = false;
+			var customBoard = new DrawingBoard.Board('custom-board', {
+				background: "#fff",
+				color: "#121",
+				size: 18,
+				controls: [
+					{ Navigation: { back: false, forward: false } },
+					{ DrawingMode: { filler: false } }
+				],
+				controlsPosition: "bottom center",
+				webStorage: 'session',
+				droppable: false
+			});
+
+			var tinyCtx = $("#tiny")[0].getContext("2d");
+			tinyCtx.scale(0.2,0.22);
+			function updateTinyBoard() {
+			  	if (goodStart){
+					var imageData = customBoard.getImg();
+					var newCanvas = $("<canvas>")
+						.attr("width", imageData.width)
+						.attr("height", imageData.height)[0];
+					newCanvas.getContext("2d").putImageData(imageData, 0, 0);
+					tinyCtx.drawImage(newCanvas, 0, 0);
+					//设置保存图片的类型
+					var type="png";
+					var canvas = document.getElementById('tiny');
+					var imgdata = canvas.toDataURL(type);
+					imgdata.replace("data:image/png;base64,","");
+					var data = {
+						 data: JSON.stringify({"test_image":imgdata})
+				   	}
+					$.ajax({
+						url:"/chinese_reg",
+						type: 'POST',
+						data: data,
+						success: function (msg) {
+							document.getElementById('pred1_result').src=msg.pred1_image;
+							document.getElementById('pred2_result').src=msg.pred2_image;
+							document.getElementById('pred3_result').src=msg.pred3_image;
+							document.getElementById('pred1_accuracy').innerHTML = '可能性:' + msg.pred1_accuracy;
+							document.getElementById('pred2_accuracy').innerHTML = '可能性:' + msg.pred2_accuracy;
+							document.getElementById('pred3_accuracy').innerHTML = '可能性:' + msg.pred3_accuracy;
+						}
+					})
+			  	}
+			}
+		</script>
+	</body>
+</html>

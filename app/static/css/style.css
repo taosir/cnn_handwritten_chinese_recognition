@@ -1,0 +1,106 @@
+html, body {
+	height: 100%;
+}
+body {
+	font-family: Arial;
+	background-color: #222222;
+	background: rgb(60,100,140); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(60,100,140,1) 0%, rgba(20,20,20,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(60,100,140,1)), color-stop(100%,rgba(20,20,20,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(60,100,140,1) 0%,rgba(20,20,20,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(60,100,140,1) 0%,rgba(20,20,20,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(60,100,140,1) 0%,rgba(20,20,20,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(60,100,140,1) 0%,rgba(20,20,20,1) 100%); /* W3C */
+	margin: 0;
+	font-family: Arial;
+	overflow: hidden;
+}
+.copyright{
+    margin-top:1px;
+    color:white;
+    text-align:center;
+}
+.copyright a{
+    color:#fc9b0b;
+    font-weight:bold;
+    text-decoration:none;
+}
+.copyright a:hover{
+    color:#fff;
+}
+#webgl_container {
+	z-index: 10;
+	overflow:hidden;
+}
+#canvasContainer {
+	z-index: 50;
+	opacity: 0.8;
+	width:330px;
+	position:relative;
+	margin:0 auto;
+	-webkit-transition: opacity 0.5s ease;
+	-moz-transition: opacity 0.5s ease;
+	-ms-transition: opacity 0.5s ease;
+	-o-transition: opacity 0.5s ease;
+	transition: opacity 0.5s ease;
+}
+#canvasContainer:hover {
+	opacity:1;
+}
+.drawingOutput {
+	display:block;
+}
+.board {
+	width: 320px;
+	height: 370px;
+	padding-bottom:10px;
+}
+.tinyBoard {
+	margin: 0 auto;
+	background-color:#fff;
+	width: 64px;
+	height: 64px;
+	border: solid thin #ccc;
+	overflow:hidden;
+	float:left;
+	color:white;
+}
+.instructions {
+	color: #fff;
+	font-size:24px;
+	text-align:center;
+	padding: 5px 0;
+}
+.info {
+	color: #bcd;
+	font-size:18px;
+	text-align:left;
+	float:left;
+	height:37px;
+	width:240px;
+	line-height:30px;
+	margin-right:5px;
+}
+.ans {
+	font-size: 24px;
+	color: #fff;
+	margin: 0 auto;
+	background-color:#fff;
+	width: 64px;
+	height: 64px;
+	border: solid 1px #c00;
+	float:left;
+	text-align:center;
+}
+#drawingInterface {
+	padding: 5px;
+	margin-bottom: 5px;
+	background: rgb(30,35,40);
+}
+.row {
+  display: table-row;
+}
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+}
