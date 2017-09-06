@@ -36,15 +36,14 @@ def build_cnn(top_k):
 
     flatten = slim.flatten(max_pool_3)
     fc1 = slim.fully_connected(slim.dropout(flatten, keep_prob), 1024, activation_fn=tf.nn.tanh, scope='fc1')  # 激活函数tanh
-    logits = slim.fully_connected(slim.dropout(fc1, keep_prob),3755, activation_fn=None,scope='fc2') # 无激活函数
-    # logits = slim.fully_connected(flatten, FLAGS.charset_size, activation_fn=None, reuse=reuse, scope='fc')
+    logits = slim.fully_connected(slim.dropout(fc1, keep_prob),chinese_word_coun, activation_fn=None,scope='fc2') # 无激活函数
     loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=labels)) # softmax
     accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(logits, 1), labels), tf.float32)) # 计算准确率
 
     global_step = tf.get_variable("step", [], initializer=tf.constant_initializer(0.0), trainable=False)
     rate = tf.train.exponential_decay(2e-4, global_step, decay_steps=2000, decay_rate=0.97, staircase=True) #
     train_op = tf.train.AdamOptimizer(learning_rate=rate).minimize(loss, global_step=global_step) # 自动调节学习率的随机梯度下降算法训练模型
-    probabilities = tf.nn.softmax(logits) #
+    probabilities = tf.nn.softmax(logits) 
 
     tf.summary.scalar('loss', loss)
     tf.summary.scalar('accuracy', accuracy)
@@ -76,7 +75,7 @@ def predictPrepare():
         saver.restore(sess, ckpt)
     return graph, sess
 
-def imageprepare(image_path):
+def imagePrepare(image_path):
     temp_image = Image.open(image_path).convert('L')
     temp_image = temp_image.resize((64, 64), Image.ANTIALIAS)
     temp_image = np.asarray(temp_image) / 255.0
@@ -88,8 +87,8 @@ def createImage(predword,imagepath):
     dr = ImageDraw.Draw(im)
     # ttf = '/usr/share/httpd/noindex/css/fonts/Bold/OpenSans-Bold.ttf'
     # fonts = ImageFont.truetype(ttf, 30)
-    fonts = ImageFont.truetype("C:\Windows\Fonts\msyh.ttc",36,encoding='utf-8')
-    dr.text((15, 10), predword,font=fonts,fill="#000000")
+    fonts = ImageFont.truetype("C:\Windows\Fonts\msyh.ttc",36,encoding='utf-8') # 可以修改为自己路径下的字体
+    dr.text((15, 10), predword,font=fonts,fill="#000000") 
     im.save(imagepath)
 
 @app.route('/')
@@ -112,7 +111,7 @@ def chinese_reg():
     if (global_times == 0):
         global graph1, sess1
         graph1, sess1 = predictPrepare() #加载模型，准备好预测
-        temp_image = imageprepare(test_image_file)
+        temp_image = imagePrepare(test_image_file)
         predict_val, predict_index = sess1.run([graph1['predicted_val_top_k'], graph1['predicted_index_top_k']],
                                               feed_dict={graph1['images']: temp_image, graph1['keep_prob']: 1.0}) # 预测top3的汉字编码以及相应的准确率
         with open(code_to_chinese_file, 'rb') as f2:
@@ -122,7 +121,7 @@ def chinese_reg():
         createImage(word_dict[predict_index[0][2]], pred3_image_file)
         global_times = 1
     else:
-        temp_image = imageprepare(test_image_file)
+        temp_image = imagePrepare(test_image_file)
         predict_val, predict_index = sess1.run([graph1['predicted_val_top_k'], graph1['predicted_index_top_k']],
                                               feed_dict={graph1['images']: temp_image, graph1['keep_prob']: 1.0})
         with open(code_to_chinese_file, 'rb') as f2:
