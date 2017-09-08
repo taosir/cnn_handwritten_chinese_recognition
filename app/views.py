@@ -109,7 +109,7 @@ def chineseRecognize():
     global __global_times
     if (__global_times == 0):
         global __graph1, __sess1
-        __graph1, __sess1 = predictPrepare() # 加载模型，准备好预测
+        __graph1, __sess1 = predictPrepare() #加载模型，准备好预测
         temp_image = imagePrepare(__test_image_file)
         predict_val, predict_index = __sess1.run([__graph1['predicted_val_top_k'], __graph1['predicted_index_top_k']],
                                               feed_dict={__graph1['images']: temp_image, __graph1['keep_prob']: 1.0}) # 预测top3的汉字编码以及相应的准确率
@@ -120,7 +120,7 @@ def chineseRecognize():
         createImage(word_dict[predict_index[0][2]], __pred3_image_file)
         __global_times = 1
     else:
-        temp_image = imageprepare(__test_image_file)
+        temp_image = imagePrepare(__test_image_file)
         predict_val, predict_index = __sess1.run([__graph1['predicted_val_top_k'], __graph1['predicted_index_top_k']],
                                               feed_dict={__graph1['images']: temp_image, __graph1['keep_prob']: 1.0})
         with open(__code_to_chinese_file, 'rb') as f2:
