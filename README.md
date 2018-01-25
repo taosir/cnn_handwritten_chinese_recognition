@@ -9,7 +9,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp; 训练图片都修整成64x64大小，这里我只训练常见的3755个汉字，在CNN识别数字的模型结构上再添加了一个卷积层和池化层，其他结构差不多。<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp; 将下载好的HWDB数据集解压处理好开始训练，这个训练过程比较长，我最终在`GPU:GTX1050Ti`上迭代了12,000次花费几个小时，最终取最可能的前三个预测值<br>
 ## 三、加载模型<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 我训练模型迭代了12,000次之后，将训练参数保存在`checkpoint`文件夹中，不过因为单个文件大小的限制，训练好的模型文件从百度云上下载：链接: https://pan.baidu.com/s/1c1YT9tA 密码: j3gx;<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp; 我训练模型迭代了12,000次之后，将训练参数保存在`checkpoint`文件夹中，不过因为单个文件大小的限制，训练好的模型文件从百度云上下载：链接: https://pan.baidu.com/s/1mj9Fgwg 密码: iwve;<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp; 下载之后直接覆盖`checkpoint`文件夹。<br>
 ## 四、环境<br>
 * python 3.6.1;<br>
