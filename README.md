@@ -13,13 +13,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp; 下载之后直接覆盖`checkpoint`文件夹。<br>
 ## 四、环境<br>
 * python 3.6.1;<br>
+* pipenv *;<br>
 * flask 0.12.2;<br>
 * tensorflow 1.3.0;<br>
 * pillow 4.2.1;<br>
 * pickleshare 0.7.4;<br>
 * numpy 1.13.1;<br>
 ## 五、运行
- 1、克隆项目，然后按照环境要求安装好相应的库(使用`pip`安装)；<br>
+ 1、克隆项目，先安装python3.0和pipenv，然后 pipenv install --three；<br>
  2、从百度云下载训练好的模型文件，放到相应的`checkpoint`文件夹下；<br>
- 3、使用`python run.py`运行；<br>
+ 3、使用`pipenv run python3 run.py`运行；<br>
  4、打开本地浏览器输入`localhost:5000`进行查看；<br>
