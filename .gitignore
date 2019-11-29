@@ -89,3 +89,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# train model
+app/train_model/checkpoint/
+
+#misc
+a.out
+
