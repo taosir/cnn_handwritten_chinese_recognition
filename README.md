@@ -25,5 +25,5 @@
  3、使用`pipenv run python3 run.py`运行；<br>
  4、打开本地浏览器输入`localhost:5000`进行查看；<br>
  
- ###六、其他
+ ## 六、其他
  * 功能非常齐全而且强大的微信商城小程序源码，感兴趣可以看看：https://github.com/taosir/wxapp_store
